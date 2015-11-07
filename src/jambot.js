@@ -8,9 +8,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/message', (req, res) => {
-	console.log(req.body);
-	console.log(req);
-	res.json(req.body);
+	const resp = {
+		text: 'sample response'
+	}
+	
+	res.json(resp);
 });
 
 // boot the app
