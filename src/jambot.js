@@ -15,6 +15,9 @@ app.post('/message', (req, res) => {
 		console.log(req.body.user_name);
 		return res.end();
 	}
+
+	console.log(req.body);
+
 	const resp = {
 		text: 'sample response'
 	}
