@@ -1,17 +1,37 @@
+import Slack from 'slack-client';
 import mongoose from 'mongoose';
-import express from 'express';
-import bodyParser from 'body-parser';
+import {Message} from './models/Message';
+import {handler, reactor} from './MessageHandler';
 import * as config from './config';
 
-const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/', (req, res) => {
-	res.send('OK');
+// start up jambot
+const slack = new Slack(config.SLACK_TOKEN, config.AUTO_RECONNECT, config.AUTO_MARK);
+
+slack.on('open', () => {
+	console.log(`Connected to Slack as @${slack.self.name}`)
 });
 
-// boot the app
-app.listen(config.PORT, () => {
-	console.log(`jambot alive and listening on port ${config.PORT}`);
+slack.on('message', (msg) => {
+	const parsed = handler(msg);
+	if (!parsed) { 
+		return;
+	};
+
+	// react to the message
+	reactor(parsed, slack);
+
+	// store the message
+	
+	
+
 });
+
+slack.on('error', (err) => {
+	console.log('error connecting to slack');
+	throw new Error(err);
+});
+
+slack.login();
+
+mongoose.connect(config.MONGO);

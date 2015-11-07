@@ -26,7 +26,8 @@
     "babel-preset-stage-3": "^6.1.2",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
-    "mongoose": "^4.2.4"
+    "mongoose": "^4.2.4",
+    "slack-client": "^1.4.1"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.4",
