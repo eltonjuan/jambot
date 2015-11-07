@@ -7,8 +7,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/', (req, res) => {
-	res.send('OK');
+app.get('/message', (req, res) => {
+	console.log(req.body);
+	console.log(req);
+	res.json(req.body);
 });
 
 // boot the app
