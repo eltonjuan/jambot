@@ -11,7 +11,7 @@
     "postinstall": "npm run build",
     "build": "babel src --out-dir lib --copy-file",
     "start": "node lib/jambot",
-    "dev": "babel-node --debug src/jambot"
+    "dev": "nodemon --exec babel-node --debug src/jambot"
   },
   "author": "Elton Juan",
   "license": "MIT",
