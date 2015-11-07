@@ -8,6 +8,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/message', (req, res) => {
+
+	// ignore messages from ourself
+	if (req.body.user_id === config.BOT_ID || req.body.user_name === config.USERNAME) {
+		console.log(req.body.user_id);
+		console.log(req.body.user_name);
+		return res.end();
+	}
 	const resp = {
 		text: 'sample response'
 	}
