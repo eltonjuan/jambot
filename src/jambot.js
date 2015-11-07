@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/message', (req, res) => {
+app.post('/message', (req, res) => {
 	const resp = {
 		text: 'sample response'
 	}
